@@ -1,22 +1,10 @@
 function fitsInOneBox(boxes) {
-  // let newBox = {
-  //   l: 0,
-  //   w: 0,
-  //   h: 0,
-  // }
-
-  // for(let i = 0; i < boxes.length; i++) {
-  //   console.log(boxes[i])
-  //   if(boxes[i].l > newBox.l && boxes[i].w > newBox.w && boxes[i].h > newBox.h) {
-  //     newBox = {
-  //       l: boxes[i].l,
-  //       w: boxes[i].w,
-  //       h: boxes[i].h,
-  //     }
-  //   }
-  //   return true
-  // }
-  // return false
+  return (() => boxes.every(({l,w,h}, idx) => {
+    if (idx === boxes.length - 1) return true
+    const nextBox = boxes[idx + 1] || {}
+    const canFitsIn = (nextBox.l > l && nextBox.w > w && nextBox.h > h) || (nextBox.l < l && nextBox.w < w && nextBox.h < h)
+    return canFitsIn
+  }))()
 }
 
 console.log(fitsInOneBox([
